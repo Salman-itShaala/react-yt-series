@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 const App = () => {
+  const [counter, setCoutner] = useState(0);
+
   return (
-    <h1 className="underline font-bold text-blue-500 text-center">
-      Welcome to 15 days live reactjs project series.
-    </h1>
+    <>
+      <h1 className="text-3xl font-bold text-blue-500 ">{counter}</h1>
+      <button
+        className="border-1 border-slate-700 rounded-sm"
+        onClick={() => setCoutner(counter + 1)}
+      >
+        Click me
+      </button>
+    </>
   );
 };
 
