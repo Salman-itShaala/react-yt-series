@@ -1,14 +1,29 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import TodoCard from "./components/TodoCard";
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [todoTitle, setTodoTitle] = useState("");
 
+  function deleteTodo(id) {
+    // todos -> array, delete todo with given id
+
+    const newArray = todos.filter((todo) => {
+      return todo.id != id;
+    });
+
+    console.log(newArray);
+
+    setTodos(newArray);
+  }
+
   function handleAddTodo() {
     // todo add
+
+    if (!todoTitle) {
+      return alert("Invalid input");
+    }
 
     const todoObj = {
       title: todoTitle,
@@ -22,7 +37,7 @@ function App() {
   }
 
   return (
-    <div className=" bg-slate-950 text-slate-100 min-h-screen">
+    <div className="relative bg-slate-950 text-slate-100 min-h-screen">
       <h1 className="font-bold text-2xl text-center">Todo app</h1>
 
       <div className="flex gap-4 justify-center py-4">
@@ -44,18 +59,12 @@ function App() {
       <div className="grid grid-cols-4 gap-4 p-4">
         {todos.map((todo) => {
           return (
-            <div
-              key={todo.id}
-              className="border-1 border-slate-100 rounded-xl p-4 flex flex-col gap-4 "
-            >
-              <p>{todo.title}</p>
-              <button className="border border-green-600 rounded p-2 w-fit">
-                Edit Todo
-              </button>
-              <button className="border border-red-600 rounded p-2 w-fit">
-                Delete Todo
-              </button>
-            </div>
+            <TodoCard
+              todo={todo}
+              deleteTodo={deleteTodo}
+              todos={todos}
+              setTodos={setTodos}
+            />
           );
         })}
       </div>
