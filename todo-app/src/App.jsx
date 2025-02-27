@@ -4,6 +4,7 @@ import TodoCard from "./components/TodoCard";
 
 function App() {
   const [todos, setTodos] = useState([]);
+
   const [todoTitle, setTodoTitle] = useState("");
 
   function deleteTodo(id) {
@@ -60,6 +61,7 @@ function App() {
         {todos.map((todo) => {
           return (
             <TodoCard
+              key={todo.id}
               todo={todo}
               deleteTodo={deleteTodo}
               todos={todos}
